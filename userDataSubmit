@@ -1,0 +1,20 @@
+const queryString = require('querystring');
+function userDataSubmit(req,resp){       //crete a function
+
+
+     let dataBody = [];
+            req.on('data',(chunk)=>{
+               dataBody.push(chunk);
+            });
+
+             req.on('end',() =>{
+                            let rawData =Buffer.concat(dataBody).toString();
+                            let readableData =queryString.parse(rawData); 
+                            console.log(readableData);
+                        })
+                    
+    resp.write(`
+         <h1>you can get your data from user form here</h1>
+        `);
+}
+module.exports = userDataSubmit;
